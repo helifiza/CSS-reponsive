@@ -1,0 +1,514 @@
+/* CSS cho trang-goc.html; dùng liên kết có sẵn, không cần sửa HTML.
+   Mobile: <= 576px | Tablet: 577–992px | Desktop: >= 993px. */
+
+/* 1. Thiết lập chung: đơn vị tương đối, ảnh co giãn, màu sắc. */
+:root {
+    --paper: #f8f5ee;
+    --paper-dark: #eee8dc;
+    --ink: #292b25;
+    --muted: #64665c;
+    --accent: #963e2c;
+    --accent-dark: #743020;
+    --line: #d8d3c7;
+    --gutter: clamp(1rem, 4vw, 3rem);
+    --serif: Georgia, "Times New Roman", serif;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    border-top: 5px solid var(--accent);
+    background: var(--paper);
+    color: var(--ink);
+    font-family: "Segoe UI", Arial, sans-serif;
+    font-size: 1rem;
+    line-height: 1.7;
+    overflow-wrap: anywhere;
+}
+
+h1,
+h2,
+h3,
+p,
+figure,
+ul {
+    margin: 0;
+}
+
+h1,
+h2,
+h3 {
+    line-height: 1.25;
+    text-wrap: balance;
+}
+
+h1,
+h2,
+.site-name {
+    font-family: var(--serif);
+    font-weight: 400;
+}
+
+h1 {
+    margin-bottom: 1.5rem;
+    font-size: clamp(2.25rem, 5.2vw, 4rem);
+    letter-spacing: -0.045em;
+}
+
+h2 {
+    margin-bottom: 1.5rem;
+    font-size: clamp(1.75rem, 3vw, 2.25rem);
+    letter-spacing: -0.025em;
+}
+
+h3 {
+    font-size: 1.125rem;
+}
+
+a {
+    color: var(--accent);
+    text-underline-offset: 0.25em;
+}
+
+a:hover {
+    color: var(--accent-dark);
+}
+
+:focus-visible {
+    outline: 3px solid var(--accent);
+    outline-offset: 4px;
+}
+
+img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+
+article,
+section {
+    scroll-margin-top: 1.5rem;
+}
+
+/* Giới hạn độ rộng nhưng luôn chừa lề trên màn hình nhỏ. */
+.site-header,
+.layout,
+.footer-cols,
+.copyright {
+    width: min(calc(100% - 2 * var(--gutter)), 74rem);
+    margin-inline: auto;
+}
+
+/* 2. Header: Flexbox cho menu tự xuống dòng. */
+.site-header {
+    padding-block: 1.5rem;
+    border-bottom: 1px solid var(--line);
+}
+
+.site-name {
+    display: inline-block;
+    color: var(--ink);
+    font-size: clamp(1.875rem, 4vw, 2.5rem);
+    line-height: 1.25;
+    letter-spacing: -0.055em;
+    text-decoration: none;
+}
+
+.tagline {
+    margin-top: 0.3rem;
+    color: var(--muted);
+    font-size: 0.875rem;
+}
+
+.main-nav {
+    margin-top: 1.25rem;
+}
+
+.main-nav ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem 1.5rem;
+    padding: 0;
+    list-style: none;
+}
+
+.main-nav a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    border-bottom: 2px solid transparent;
+    color: var(--ink);
+    font-size: 0.9375rem;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.main-nav a:hover,
+.main-nav a:focus-visible {
+    border-bottom-color: var(--accent);
+    color: var(--accent);
+}
+
+/* 3. Mobile trước: nội dung và sidebar xếp thành một cột. */
+.layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 3rem;
+    margin-block: clamp(2rem, 5vw, 4rem);
+}
+
+main,
+.sidebar,
+.value-card,
+.member,
+.footer-cols > li {
+    min-width: 0;
+}
+
+main > section {
+    margin-top: clamp(2.5rem, 5vw, 4rem);
+    padding-top: 2rem;
+    border-top: 1px solid var(--line);
+}
+
+#gioi-thieu figure {
+    margin-bottom: 1.5rem;
+}
+
+#gioi-thieu img {
+    width: 100%;
+}
+
+figcaption {
+    margin-top: 0.75rem;
+    color: var(--muted);
+    font-size: 0.8125rem;
+    font-style: italic;
+}
+
+#gioi-thieu > p {
+    max-width: 65ch;
+}
+
+#gioi-thieu > p + p {
+    margin-top: 1rem;
+}
+
+#gioi-thieu > p:first-of-type {
+    font-size: 1.125rem;
+}
+
+/* 4. Grid cho các giá trị, thành viên và các cột chân trang. */
+.value-list,
+.team-list,
+.footer-cols {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1rem;
+    padding: 0;
+    list-style: none;
+}
+
+.value-list {
+    counter-reset: value;
+}
+
+.value-card {
+    padding: 1.5rem;
+    border: 1px solid var(--line);
+    background: #fffdf8;
+    counter-increment: value;
+}
+
+.value-card::before {
+    content: counter(value, decimal-leading-zero);
+    display: block;
+    margin-bottom: 1.25rem;
+    color: var(--accent);
+    font-family: var(--serif);
+    font-size: 1.75rem;
+    line-height: 1;
+}
+
+.value-card h3 {
+    margin-bottom: 0.75rem;
+}
+
+.value-card p,
+.member p {
+    color: var(--muted);
+    font-size: 0.9375rem;
+}
+
+.member {
+    display: grid;
+    grid-template-columns: 4.875rem minmax(0, 1fr);
+    align-content: start;
+    gap: 0.375rem 1rem;
+    padding-block: 0.75rem;
+}
+
+.member img {
+    grid-row: span 2;
+    /* Ảnh gốc chỉ 78 x 48: giữ kích thước để tránh phóng lớn bị mờ. */
+    width: 4.875rem;
+    border-radius: 2px;
+}
+
+/* 5. Form: nhãn rõ ràng, ô nhập vừa container, focus cho bàn phím. */
+#lien-he {
+    padding: clamp(1.25rem, 3vw, 2rem);
+    border-top: 3px solid var(--accent);
+    background: var(--paper-dark);
+}
+
+.contact-form {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1.25rem;
+}
+
+.contact-form p {
+    min-width: 0;
+}
+
+.contact-form label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-size: 0.9375rem;
+    font-weight: 600;
+}
+
+.contact-form br {
+    display: none;
+}
+
+.contact-form input,
+.contact-form textarea {
+    display: block;
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #aaa697;
+    border-radius: 2px;
+    background: #fffdf8;
+    color: var(--ink);
+    font: inherit;
+    line-height: 1.5;
+}
+
+.contact-form textarea {
+    min-height: 9rem;
+    resize: vertical;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+    border-color: var(--accent);
+}
+
+.contact-form button {
+    min-height: 48px;
+    width: 100%;
+    padding: 0.75rem 1.75rem;
+    border: 1px solid var(--accent);
+    border-radius: 2px;
+    background: var(--accent);
+    color: #fff;
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.contact-form button:hover {
+    border-color: var(--accent-dark);
+    background: var(--accent-dark);
+}
+
+/* 6. Sidebar và footer. */
+.sidebar {
+    align-self: start;
+    padding-top: 1.25rem;
+    border-top: 3px solid var(--ink);
+}
+
+.sidebar h2 {
+    margin-bottom: 0.75rem;
+    font-size: 1.5rem;
+}
+
+.recent {
+    padding: 0;
+    list-style: none;
+}
+
+.recent li {
+    border-bottom: 1px solid var(--line);
+}
+
+.recent a {
+    display: block;
+    padding-block: 1rem;
+    color: var(--ink);
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.recent a:hover {
+    color: var(--accent);
+    text-decoration: underline;
+}
+
+.sidebar > p {
+    margin-top: 1.5rem;
+    color: var(--muted);
+    font-size: 0.875rem;
+}
+
+.site-footer {
+    padding-block: 3rem 1.5rem;
+    background: var(--ink);
+    color: var(--paper);
+}
+
+.footer-cols {
+    gap: 2rem;
+}
+
+.footer-cols h3 {
+    margin-bottom: 0.75rem;
+    font-size: 1rem;
+}
+
+.footer-cols p {
+    color: #d4d4c8;
+    font-size: 0.875rem;
+}
+
+.copyright {
+    margin-top: 2rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid #51534a;
+    color: #d4d4c8;
+}
+
+/* 7. Tablet: các nhóm thẻ và form chia hai cột. */
+@media (min-width: 577px) {
+    .value-list,
+    .team-list,
+    .footer-cols,
+    .contact-form {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .contact-form p:nth-child(n + 3) {
+        grid-column: 1 / -1;
+    }
+
+    .contact-form button {
+        width: auto;
+    }
+}
+
+/* 8. Desktop: main + sidebar; các nhóm thẻ có ba cột. */
+@media (min-width: 993px) {
+    .site-header {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        column-gap: 2rem;
+    }
+
+    .tagline {
+        grid-column: 1;
+    }
+
+    .main-nav {
+        grid-column: 2;
+        grid-row: 1 / 3;
+        align-self: center;
+        margin-top: 0;
+    }
+
+    .layout {
+        grid-template-columns: minmax(0, 1fr) 15rem;
+        gap: clamp(2rem, 4vw, 3.5rem);
+    }
+
+    .value-list,
+    .team-list {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .member {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .member img {
+        grid-row: auto;
+        margin-bottom: 0.75rem;
+    }
+
+    .footer-cols {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+}
+
+/* Tôn trọng thiết lập giảm chuyển động của người dùng. */
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+}
+
+/* Bản in: nền trắng, chữ đen, giữ nội dung trong khổ giấy. */
+@media print {
+    body {
+        border: 0;
+        background: #fff;
+        color: #000;
+        font-size: 12pt;
+    }
+
+    .layout {
+        display: block;
+    }
+
+    .sidebar {
+        margin-top: 2rem;
+    }
+
+    .site-footer,
+    #lien-he,
+    .value-card {
+        background: #fff;
+        color: #000;
+    }
+
+    a,
+    .tagline,
+    figcaption,
+    .value-card p,
+    .member p,
+    .sidebar > p,
+    .footer-cols p,
+    .copyright {
+        color: #000;
+    }
+
+    figure,
+    .value-card,
+    .member,
+    .contact-form p {
+        break-inside: avoid;
+    }
+}
